@@ -1,20 +1,17 @@
 package management;
 
-import java.io.File;
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Make_Folder {
-	Make_Folder(){
-		String a;
-		System.out.print("Directory Name : ");
+	Make_Folder(List folder_list, File cd){
+		String folder_name;
+		System.out.print("Folder Name : ");
 		Scanner scan = new Scanner(System.in); 
-		a = scan.nextLine();
-		File path = new File(".");
-		File newFile2 = new File(path + "/dir/"+ a);
-	    if(newFile2.mkdir()){   //만드려는 디렉토리가 하나일 경우
-	      System.out.println("디렉토리를 생성했습니다.");
-	    }else{
-	      System.out.println("디렉토리를 생성하지 못했습니다.");
-	    }
+		folder_name = scan.nextLine();
+		
+		folder_list.add(new Folder(folder_name, cd));
 	}
 }
