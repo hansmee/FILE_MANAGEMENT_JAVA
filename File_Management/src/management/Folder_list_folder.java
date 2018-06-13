@@ -94,36 +94,37 @@ public class Folder_list_folder extends JFrame {
                                  final int fixed = j;
                                  if (folder_list.get(fixed).equals(folder)) {
                                     folder_list.get(fixed).directory = nd;
+                                    File original = folder_list.get(fixed).folder;
                                     File change = new File(
                                           nd + "/" + folder_list.get(fixed).folder_name + "/");
                                     folder_list.get(fixed).folder = change;
                                     for (int i = 0; i < folder_list.size(); i++) {
                                        if (folder_list.get(i).directory.toString()
-                                             .contains(folder_list.get(fixed).folder.toString())) {
+                                             .contains(original.toString())) {
 
                                           File change_directory = new File(
                                                 nd + "/" + folder_list.get(fixed).folder_name + "/"
                                                       + folder_list.get(i).directory.toString()
-                                                            .substring(folder_list.get(fixed).folder
-                                                                  .toString().length()));
+                                                            .substring(original.toString().length()));
                                           folder_list.get(i).directory = change_directory;
-                                          System.out.println("안 폴더 :" + folder_list.get(i).directory);
+
                                           File change_folder = new File(change_directory + "/"
                                                 + folder_list.get(i).folder_name + "/");
                                           folder_list.get(i).folder = change_folder;
-                                          System.out.println("안 폴더 :" + folder_list.get(i).folder);
+
                                        }
                                     }
                                     for (int i = 0; i < file_list.size(); i++) {
                                        if (file_list.get(i).directory.toString()
-                                             .contains(folder_list.get(fixed).folder.toString())) {
+                                             .contains(original.toString())) {
 
                                           File change_directory = new File(
                                                 nd + "/" + folder_list.get(fixed).folder_name + "/"
                                                       + folder_list.get(i).directory.toString()
-                                                            .substring(folder_list.get(fixed).folder
+                                                            .substring(original
                                                                   .toString().length()));
                                           file_list.get(i).directory = change_directory;
+                                          System.out.println(file_list.get(i).directory);
 
                                        }
                                     }
@@ -160,42 +161,43 @@ public class Folder_list_folder extends JFrame {
                                           final int fixed = j;
                                           if (folder_list.get(fixed).equals(folder)) {
                                              folder_list.get(fixed).directory = nd;
+                                             File original = folder_list.get(fixed).folder;
+                                             File change = new File(
+                                                   nd + "/" + folder_list.get(fixed).folder_name + "/");
+                                             folder_list.get(fixed).folder = change;
                                              for (int i = 0; i < folder_list.size(); i++) {
-                                                if (folder_list.get(i).directory.toString().contains(
-                                                      folder_list.get(fixed).folder.toString())) {
+                                                if (folder_list.get(i).directory.toString()
+                                                      .contains(original.toString())) {
 
-                                                   File change_directory = new File(nd + "/"
-                                                         + folder_list.get(fixed).folder_name + "/"
-                                                         + folder_list.get(i).directory.toString()
-                                                               .substring(folder_list
-                                                                     .get(fixed).folder
-                                                                           .toString()
-                                                                           .length()));
+                                                   File change_directory = new File(
+                                                         nd + "/" + folder_list.get(fixed).folder_name + "/"
+                                                               + folder_list.get(i).directory.toString()
+                                                                     .substring(original.toString().length()));
                                                    folder_list.get(i).directory = change_directory;
+
                                                    File change_folder = new File(change_directory + "/"
                                                          + folder_list.get(i).folder_name + "/");
                                                    folder_list.get(i).folder = change_folder;
+
                                                 }
                                              }
                                              for (int i = 0; i < file_list.size(); i++) {
-                                                if (file_list.get(i).directory.toString().contains(
-                                                      folder_list.get(fixed).folder.toString())) {
+                                                if (file_list.get(i).directory.toString()
+                                                      .contains(original.toString())) {
 
-                                                   File change_directory = new File(nd + "/"
-                                                         + folder_list.get(fixed).folder_name + "/"
-                                                         + folder_list.get(i).directory.toString()
-                                                               .substring(folder_list
-                                                                     .get(fixed).folder
-                                                                           .toString()
-                                                                           .length()));
+                                                   File change_directory = new File(
+                                                         nd + "/" + folder_list.get(fixed).folder_name + "/"
+                                                               + folder_list.get(i).directory.toString()
+                                                                     .substring(original
+                                                                           .toString().length()));
                                                    file_list.get(i).directory = change_directory;
+                                                   System.out.println(file_list.get(i).directory);
 
                                                 }
                                              }
                                              frame.dispose();
                                              MyFrame fff = new MyFrame(file_list, folder_list, cd);
-                                             Show_list s = new Show_list(file_list, folder_list, cd,
-                                                   fff.frame);
+                                             Show_list s = new Show_list(file_list, folder_list, cd, fff.frame);
                                           }
                                        }
                                     }
