@@ -36,11 +36,13 @@ public class Show_list extends JFrame {
 			String label = cd.toString();
 			int a = 0;
 			for (int i = label.length() - 1; i >= 0; i--) {
-				if (label.charAt(i) == '/') {
+				String bb = label.substring(i, i+1);
+				if (bb.equals(label.substring(1, 2))) {
 					a = i;
 					break;
 				}
 			}
+			
 			if (a == 1)
 				label = "FILE MANAGEMENT";
 			else

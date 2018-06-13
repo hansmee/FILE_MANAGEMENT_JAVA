@@ -214,19 +214,27 @@ public class File_Management extends JFrame {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String a, b;
-		int n;
-		Scanner scan = new Scanner(System.in);
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					String a, b;
+					int n;
+					Scanner scan = new Scanner(System.in);
 
-		// all files and folders in list
-		List<Files> file_list = new ArrayList<Files>();
-		List<Folder> folder_list = new ArrayList<Folder>();
+					// all files and folders in list
+					List<Files> file_list = new ArrayList<Files>();
+					List<Folder> folder_list = new ArrayList<Folder>();
 
-		// current directory
-		File cd = new File("./dir/");
+					// current directory
+					File cd = new File("./dir/");
 
-		MyFrame fr = new MyFrame(file_list, folder_list, cd);
-		Show_list s = new Show_list(file_list, folder_list, cd, fr.frame);
+					MyFrame fr = new MyFrame(file_list, folder_list, cd);
+					Show_list s = new Show_list(file_list, folder_list, cd, fr.frame);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 
 	}
 
