@@ -14,14 +14,14 @@ import javax.swing.border.EmptyBorder;
 import management.File_Management.MyFrame;
 
 public class Files {
-	String file_name;
-	File directory;
-	File file;
+	public String file_name;
+	public File directory;
+	public File file;
 	
 	public JFrame frame = null;
-	public Container cp = null;
-	public JLabel lb = null;
-	public JButton Enter;
+	private Container cp = null;
+	private JLabel lb = null;
+	private JButton Enter;
 	private TextArea taDisplay;
 
 	Files(String name, File cd, JFrame frame_ori, List list1, List list2) {
@@ -47,7 +47,6 @@ public class Files {
 		directory = cd;
 
 		Enter.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent evt) {
 				try {
 					// create file

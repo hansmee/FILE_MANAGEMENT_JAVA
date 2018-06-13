@@ -16,36 +16,37 @@ import management.File_Management.MyFrame;
 // main function
 public class File_Management extends JFrame {
 	// all files and folders in list
-	public List<Files> file_list = new ArrayList<Files>();
-	public List<Folder> folder_list = new ArrayList<Folder>();
+	private List<Files> file_list = new ArrayList<Files>();
+	private List<Folder> folder_list = new ArrayList<Folder>();
 
 	static public class MyFrame extends JFrame {
-		List<Files> file_list = new ArrayList<Files>();
-		List<Folder> folder_list = new ArrayList<Folder>();
+		private List<Files> file_list = new ArrayList<Files>();
+		private List<Folder> folder_list = new ArrayList<Folder>();
+		
 		public JFrame frame = null;
-		public Container cp = null;
-		public JLabel lb = null;
-		public JButton Make_file;
-		public JButton Make_folder;
+		private Container cp = null;
+		private JLabel lb = null;
+		private JButton Make_file;
+		private JButton Make_folder;
 
 		// file
-		public JFrame frame_file = null;
-		public Container cp_file = null;
-		public JLabel lb_file = null;
-		public JButton Enter_file;
+		private JFrame frame_file = null;
+		private Container cp_file = null;
+		private JLabel lb_file = null;
+		private JButton Enter_file;
 		private TextField tfInput_file;
 		private String file_name;
 
 		// wrong
-		public JFrame frame_wrong = null;
-		public JLabel lb_wrong = null;
-		public JButton Enter_wrong;
+		private JFrame frame_wrong = null;
+		private JLabel lb_wrong = null;
+		private JButton Enter_wrong;
 
 		// folder
-		public JFrame frame_folder = null;
-		public Container cp_folder = null;
-		public JLabel lb_folder = null;
-		public JButton Enter_folder;
+		private JFrame frame_folder = null;
+		private Container cp_folder = null;
+		private JLabel lb_folder = null;
+		private JButton Enter_folder;
 		private TextField tfInput_folder;
 		private String folder_name;
 
@@ -78,8 +79,8 @@ public class File_Management extends JFrame {
 			cp.add(Make_file);
 			cp.add(Make_folder);
 
+			// Make_file button
 			Make_file.addActionListener(new ActionListener() {
-
 				public void actionPerformed(ActionEvent evt) {
 					JFrame f = new JFrame();
 					frame_file = f;
@@ -97,8 +98,8 @@ public class File_Management extends JFrame {
 
 					frame_file.setVisible(true);
 
+					// enter_file button
 					Enter_file.addActionListener(new ActionListener() {
-
 						public void actionPerformed(ActionEvent evt) {
 							file_name = tfInput_file.getText();
 							int flag = 0;
@@ -121,8 +122,8 @@ public class File_Management extends JFrame {
 									cp_wrong.setBackground(Color.WHITE);
 									frame_wrong.setVisible(true);
 
+									// enter_wrong button
 									Enter_wrong.addActionListener(new ActionListener() {
-
 										public void actionPerformed(ActionEvent evt) {
 											frame_wrong.dispose();
 										}
@@ -141,8 +142,8 @@ public class File_Management extends JFrame {
 				}
 			});
 
+			// Make_folder button
 			Make_folder.addActionListener(new ActionListener() {
-
 				public void actionPerformed(ActionEvent evt) {
 					JFrame f = new JFrame();
 					frame_folder = f;
@@ -160,8 +161,9 @@ public class File_Management extends JFrame {
 					cp_file.add(Enter_folder);
 					cp_file.setBackground(Color.WHITE);
 					frame_folder.setVisible(true);
+					
+					// enter_folder button
 					Enter_folder.addActionListener(new ActionListener() {
-
 						public void actionPerformed(ActionEvent evt) {
 							folder_name = tfInput_folder.getText();
 							int flag = 0;
@@ -182,8 +184,9 @@ public class File_Management extends JFrame {
 									cp_wrong.add(Enter_wrong);
 									cp_wrong.setBackground(Color.WHITE);
 									frame_wrong.setVisible(true);
+									
+									// enter_wrong button
 									Enter_wrong.addActionListener(new ActionListener() {
-
 										public void actionPerformed(ActionEvent evt) {
 											frame_wrong.dispose();
 										}

@@ -18,28 +18,28 @@ import management.File_Management.MyFrame;
 public class Folder_list extends JFrame {
 	public JFrame f = null;
 	// enter password
-	public JFrame frame_password = null;
-	public JLabel lb_password = null;
-	public JButton Enter_password;
+	private JFrame frame_password = null;
+	private JLabel lb_password = null;
+	private JButton Enter_password;
 	private TextField tfInput_password;
 	private String password;
 
 	// edit password
-	public JFrame frame_otherpw = null;
-	public JLabel lb_otherpw = null;
-	public JButton Change;
-	public JButton No_Change;
+	private JFrame frame_otherpw = null;
+	private JLabel lb_otherpw = null;
+	private JButton Change;
+	private JButton No_Change;
 
 	// if wrong
-	public JFrame frame_wrongpw = null;
-	public JLabel lb_wrongpw = null;
-	public JButton wrongpw;
+	private JFrame frame_wrongpw = null;
+	private JLabel lb_wrongpw = null;
+	private JButton wrongpw;
 	
-	public Folder folder = null;
-	public File nd = null;
+	private Folder folder = null;
+	private File nd = null;
 
-	List<Files> file_list = new ArrayList<Files>();
-	List<Folder> folder_list = new ArrayList<Folder>();
+	private List<Files> file_list = new ArrayList<Files>();
+	private List<Folder> folder_list = new ArrayList<Folder>();
 
 	Folder_list(List list1, List list2, File cd, JFrame frame, Files file){
 		file_list = list1;

@@ -17,8 +17,8 @@ import management.File_Management.MyFrame;
 
 public class Show_list extends JFrame {
 
-	List<Files> file_list = new ArrayList<Files>();
-	List<Folder> folder_list = new ArrayList<Folder>();
+	private List<Files> file_list = new ArrayList<Files>();
+	private List<Folder> folder_list = new ArrayList<Folder>();
 
 	Show_list(List list1, List list2, File cd, JFrame frame) {
 
@@ -175,7 +175,7 @@ public class Show_list extends JFrame {
 	}
 
 	// *****PANEL******//
-	class RoundedPanel extends JPanel {
+	private class RoundedPanel extends JPanel {
 		private Color backgroundColor;
 		private int cornerRadius = 15;
 

@@ -17,30 +17,30 @@ import management.File_Management.MyFrame;
 
 public class File_Frame extends JFrame {
 	public JFrame f = null;
-	public JFrame frame_content = null;
-	public JButton save;
-	public JButton close;
+	private JFrame frame_content = null;
+	private JButton save;
+	private JButton close;
 	private TextArea taDisplay;
 
 	// change name
-	public JFrame change_name = null;
-	public JLabel lb_name = null;
-	public JButton Enter_name;
-	public TextField tfInput_name;
-	public String new_name;
-	public File new_path = null;
+	private JFrame change_name = null;
+	private JLabel lb_name = null;
+	private JButton Enter_name;
+	private TextField tfInput_name;
+	private String new_name;
+	private File new_path = null;
 
 	// wrong
-	public JFrame frame_wrong = null;
-	public JLabel lb_wrong = null;
-	public JButton Enter_wrong;
+	private JFrame frame_wrong = null;
+	private JLabel lb_wrong = null;
+	private JButton Enter_wrong;
 
 	// move
-	public JFrame frame_move = null;
-	public JLabel lb_move = null;
-	public JPanel p_move = null;
+	private JFrame frame_move = null;
+	private JLabel lb_move = null;
+	private JPanel p_move = null;
 
-	List<Files> list = new ArrayList<Files>();
+	private List<Files> list = new ArrayList<Files>();
 
 	public File_Frame(Files files, JFrame frame, File cd, List file_list, List folder_list) {
 		JFrame fr = new JFrame();
@@ -268,8 +268,8 @@ public class File_Frame extends JFrame {
 										while (scan.hasNextLine()) {
 											osw.write(scan.nextLine());
 											osw.write("\n");
-											bw.close();
 										}
+										bw.close();
 									} catch (FileNotFoundException ex) {
 										ex.printStackTrace();
 									} catch (IOException ex) {
@@ -299,12 +299,12 @@ public class File_Frame extends JFrame {
 			}
 		});
 
-		p.add(b1);
-		p.add(b2);
-		p.add(b3);
-		p.add(b5);
-		p.add(b6);
-		p.add(b4);
+		p.add(b1); // open
+		p.add(b2); // delete
+		p.add(b3); // edit
+		p.add(b5); // change name
+		p.add(b6); // move
+		p.add(b4); // close
 
 		f.add(p);
 	}
