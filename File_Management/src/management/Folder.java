@@ -19,11 +19,4 @@ public class Folder {
 		f.mkdir();
 		folder = f;
 	}
-	
-	public void changeFolder(File f, String n) {
-		if (!folder.renameTo(f)) {
-		      System.err.println("이름 변경 에러");
-		      folder_name = n;
-		}
-	}
 }

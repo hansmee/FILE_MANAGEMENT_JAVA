@@ -17,6 +17,7 @@ public class Files {
 	String file_name;
 	File directory;
 	File file;
+	
 	public JFrame frame = null;
 	public Container cp = null;
 	public JLabel lb = null;
@@ -27,18 +28,20 @@ public class Files {
 		JFrame f = new JFrame();
 		frame = f;
 		frame.setTitle("File Content");
-		frame.setSize(400, 800);
-		frame.setLocation(300, 300);
-		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(400, 400);
+        frame.setLocationRelativeTo(null);
 		Enter = new JButton("Enter");
-		taDisplay = new TextArea(5, 40);
+		taDisplay = new TextArea(18, 40);
+		
 		Container cp = frame.getContentPane();
-		cp.add(taDisplay);
 		cp.setLayout(new FlowLayout());
-		cp.add(Enter);
-		lb = new JLabel("Please Write Content");
-		frame.add(lb);
 		cp.setBackground(Color.WHITE);
+		lb = new JLabel("Please Write Content");
+		
+		frame.add(lb);
+		cp.add(taDisplay);
+		cp.add(Enter);
+		
 		frame.setVisible(true);
 		file_name = name;
 		directory = cd;

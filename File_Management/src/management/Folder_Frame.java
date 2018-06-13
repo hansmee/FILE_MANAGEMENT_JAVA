@@ -26,28 +26,28 @@ import management.Folder;
 public class Folder_Frame extends JFrame {
 	List<Files> file_list = new ArrayList<Files>();
 	List<Folder> folder_list = new ArrayList<Folder>();
-	
+
 	public JFrame f = null;
 	public Container c = null;
-	
+
 	// enter password
 	public JFrame frame_password = null;
 	public JLabel lb_password = null;
 	public JButton Enter_password;
 	private TextField tfInput_password;
 	private String password;
-	
+
 	// edit password
 	public JFrame frame_otherpw = null;
 	public JLabel lb_otherpw = null;
 	public JButton Change;
 	public JButton No_Change;
-	
+
 	// if wrong
 	public JFrame frame_wrongpw = null;
 	public JLabel lb_wrongpw = null;
 	public JButton wrongpw;
-	
+
 	// change name
 	public JFrame change_name = null;
 	public JLabel lb_name = null;
@@ -60,7 +60,7 @@ public class Folder_Frame extends JFrame {
 	public Folder_Frame(Folder folder, JFrame frame, File cd, List list1, List list2) {
 		file_list = list1;
 		folder_list = list2;
-		
+
 		JFrame fr = new JFrame();
 		f = fr;
 		f.setSize(300, 300);
@@ -98,17 +98,17 @@ public class Folder_Frame extends JFrame {
 							JFrame f_password = new JFrame();
 							frame_password = f_password;
 							frame_password.setTitle("Enter Password");
-							frame_password.setSize(400, 400);
+							frame_password.setSize(300, 80);
 							frame_password.setLocationRelativeTo(null);
 							Enter_password = new JButton("Enter");
 							tfInput_password = new TextField(10);
 
 							Container cp_password = frame_password.getContentPane();
-							cp_password.add(tfInput_password);
 							cp_password.setLayout(new FlowLayout());
-							cp_password.add(Enter_password);
 							lb_password = new JLabel("Enter Password");
 							frame_password.add(lb_password);
+							cp_password.add(tfInput_password);
+							cp_password.add(Enter_password);
 							cp_password.setBackground(Color.WHITE);
 							frame_password.setVisible(true);
 							Enter_password.addActionListener(new ActionListener() {
@@ -120,12 +120,11 @@ public class Folder_Frame extends JFrame {
 										frame.dispose();
 										MyFrame fff = new MyFrame(file_list, folder_list, nd);
 										Show_list s = new Show_list(file_list, folder_list, nd, fff.frame);
-									}
-									else {
+									} else {
 										JFrame f_wrongpw = new JFrame();
 										frame_wrongpw = f_wrongpw;
 										frame_wrongpw.setTitle("ERROR!");
-										frame_wrongpw.setSize(400, 400);
+										frame_wrongpw.setSize(300, 80);
 										frame_wrongpw.setLocationRelativeTo(null);
 										wrongpw = new JButton("Okay");
 
@@ -162,18 +161,79 @@ public class Folder_Frame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < folder_list.size(); i++) {
 					if (folder_list.get(i).equals(folder)) {
-						deleteDirectory(folder.folder);
-						folder_list.remove(i);
+						final int i_delete = i;
+						if (folder.password == "") {
+							deleteDirectory(folder.folder);
+							folder_list.remove(i_delete);
 
-						frame.dispose();
-						MyFrame fff = new MyFrame(file_list, folder_list, cd);
-						Show_list s = new Show_list(file_list, folder_list, cd, fff.frame);
+							frame.dispose();
+							MyFrame fff = new MyFrame(file_list, folder_list, cd);
+							Show_list s = new Show_list(file_list, folder_list, cd, fff.frame);
+						} else {
+							JFrame f_password = new JFrame();
+							frame_password = f_password;
+							frame_password.setTitle("Enter Password");
+							frame_password.setSize(300, 80);
+							frame_password.setLocationRelativeTo(null);
+							Enter_password = new JButton("Enter");
+							tfInput_password = new TextField(10);
+
+							Container cp_password = frame_password.getContentPane();
+							cp_password.setLayout(new FlowLayout());
+							lb_password = new JLabel("Enter Password");
+							frame_password.add(lb_password);
+							cp_password.add(tfInput_password);
+							cp_password.add(Enter_password);
+							cp_password.setBackground(Color.WHITE);
+							frame_password.setVisible(true);
+							Enter_password.addActionListener(new ActionListener() {
+
+								public void actionPerformed(ActionEvent evt) {
+									if (folder.password.equals(tfInput_password.getText())) {
+										frame_password.dispose();
+										deleteDirectory(folder.folder);
+										folder_list.remove(i_delete);
+
+										frame.dispose();
+										MyFrame fff = new MyFrame(file_list, folder_list, cd);
+										Show_list s = new Show_list(file_list, folder_list, cd, fff.frame);
+									} else {
+										JFrame f_wrongpw = new JFrame();
+										frame_wrongpw = f_wrongpw;
+										frame_wrongpw.setTitle("ERROR!");
+										frame_wrongpw.setSize(300, 80);
+										frame_wrongpw.setLocationRelativeTo(null);
+										wrongpw = new JButton("Okay");
+
+										Container cp_wrongpw = frame_wrongpw.getContentPane();
+										cp_wrongpw.setLayout(new FlowLayout());
+										lb_wrongpw = new JLabel("Entered password is wrong!");
+										frame_wrongpw.add(lb_wrongpw);
+										cp_wrongpw.add(wrongpw);
+
+										cp_wrongpw.setBackground(Color.WHITE);
+										frame_wrongpw.setVisible(true);
+										wrongpw.addActionListener(new ActionListener() {
+
+											public void actionPerformed(ActionEvent evt) {
+												frame.dispose();
+												MyFrame fff = new MyFrame(file_list, folder_list, cd);
+												Show_list s = new Show_list(file_list, folder_list, cd, fff.frame);
+												frame_password.dispose();
+												frame_wrongpw.dispose();
+											}
+										});
+									}
+								}
+							});
+						}
+
 					}
 				}
 				f.dispose();
 			}
 		});
-		
+
 		// password
 		b3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -181,19 +241,20 @@ public class Folder_Frame extends JFrame {
 					JFrame f_password = new JFrame();
 					frame_password = f_password;
 					frame_password.setTitle("Enter Password");
-					frame_password.setSize(400, 400);
+					frame_password.setSize(300, 80);
 					frame_password.setLocationRelativeTo(null);
 					Enter_password = new JButton("Enter");
 					tfInput_password = new TextField(10);
 
 					Container cp_password = frame_password.getContentPane();
-					cp_password.add(tfInput_password);
 					cp_password.setLayout(new FlowLayout());
-					cp_password.add(Enter_password);
 					lb_password = new JLabel("Enter Password");
 					frame_password.add(lb_password);
+					cp_password.add(tfInput_password);
+					cp_password.add(Enter_password);
 					cp_password.setBackground(Color.WHITE);
 					frame_password.setVisible(true);
+
 					Enter_password.addActionListener(new ActionListener() {
 
 						public void actionPerformed(ActionEvent evt) {
@@ -211,7 +272,7 @@ public class Folder_Frame extends JFrame {
 					JFrame f_otherpw = new JFrame();
 					frame_otherpw = f_otherpw;
 					frame_otherpw.setTitle("error!");
-					frame_otherpw.setSize(400, 400);
+					frame_otherpw.setSize(350, 100);
 					frame_otherpw.setLocationRelativeTo(null);
 					Change = new JButton("Reset");
 					No_Change = new JButton("Cancel");
@@ -232,17 +293,17 @@ public class Folder_Frame extends JFrame {
 							JFrame f_password = new JFrame();
 							frame_password = f_password;
 							frame_password.setTitle("Reset Password");
-							frame_password.setSize(400, 400);
+							frame_password.setSize(300, 80);
 							frame_password.setLocationRelativeTo(null);
 							Enter_password = new JButton("Enter");
 							tfInput_password = new TextField(10);
 
 							Container cp_password = frame_password.getContentPane();
-							cp_password.add(tfInput_password);
 							cp_password.setLayout(new FlowLayout());
-							cp_password.add(Enter_password);
 							lb_password = new JLabel("Enter Password");
 							frame_password.add(lb_password);
+							cp_password.add(tfInput_password);
+							cp_password.add(Enter_password);
 							cp_password.setBackground(Color.WHITE);
 							frame_password.setVisible(true);
 							Enter_password.addActionListener(new ActionListener() {
@@ -260,7 +321,7 @@ public class Folder_Frame extends JFrame {
 										JFrame f_wrongpw = new JFrame();
 										frame_wrongpw = f_wrongpw;
 										frame_wrongpw.setTitle("ERROR!");
-										frame_wrongpw.setSize(400, 400);
+										frame_wrongpw.setSize(300, 80);
 										frame_wrongpw.setLocationRelativeTo(null);
 										wrongpw = new JButton("Okay");
 
@@ -307,45 +368,67 @@ public class Folder_Frame extends JFrame {
 				f.dispose();
 			}
 		});
-		
+
 		// change name
 		b5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (i = 0; i < folder_list.size(); i++) {
 					if (folder_list.get(i).equals(folder)) {
+						final int fixed_i = i;
 						if (folder.password == "") {
 							JFrame c_name = new JFrame();
 							change_name = c_name;
 							change_name.setTitle("Change Folder Name");
-							change_name.setSize(300, 300);
+							change_name.setSize(300, 80);
 							change_name.setLocationRelativeTo(null);
-							
+
 							Enter_name = new JButton("Enter");
 							tfInput_name = new TextField(10);
-							
+
 							Container cp_file = change_name.getContentPane();
-							cp_file.add(tfInput_name);
 							cp_file.setLayout(new FlowLayout());
-							cp_file.add(Enter_name);
 							lb_name = new JLabel("Folder Name");
 							change_name.add(lb_name);
+							cp_file.add(tfInput_name);
+							cp_file.add(Enter_name);
 							cp_file.setBackground(Color.WHITE);
 							change_name.setVisible(true);
-							
-							final int fixed_i = i;
+
 							Enter_name.addActionListener(new ActionListener() {
 
 								public void actionPerformed(ActionEvent evt) {
+
 									new_name = tfInput_name.getText();
 									change_name.dispose();
+
 									new_path = new File(cd + "/" + new_name + "/");
-									
-									System.out.println(folder_list.get(fixed_i).folder.toString() + ", " + new_path);
-									
-									folder_list.get(fixed_i).folder.renameTo(new_path);
+									for (int i = 0; i < folder_list.size(); i++) {
+										if (folder_list.get(i).directory.toString()
+												.contains(folder_list.get(fixed_i).folder.toString())) {
+
+											File change_directory = new File(
+													new_path + folder_list.get(i).directory.toString().substring(
+															folder_list.get(fixed_i).folder.toString().length()));
+											folder_list.get(i).directory = change_directory;
+											File change_folder = new File(
+													change_directory + "/" + folder_list.get(i).folder_name + "/");
+											folder_list.get(i).folder = change_folder;
+										}
+									}
+									for (int i = 0; i < file_list.size(); i++) {
+										if (file_list.get(i).directory.toString()
+												.contains(folder_list.get(fixed_i).folder.toString())) {
+
+											File change_directory = new File(
+													new_path + file_list.get(i).directory.toString().substring(
+															folder_list.get(fixed_i).folder.toString().length()));
+											file_list.get(i).directory = change_directory;
+
+										}
+									}
+
+									folder_list.get(fixed_i).folder = new_path;
 									folder_list.get(fixed_i).folder_name = new_name;
-									
-									System.out.println("after change: " + folder_list.get(fixed_i).folder.toString());
 
 									frame.dispose();
 									MyFrame fff = new MyFrame(file_list, folder_list, cd);
@@ -356,36 +439,95 @@ public class Folder_Frame extends JFrame {
 							JFrame f_password = new JFrame();
 							frame_password = f_password;
 							frame_password.setTitle("Enter Password");
-							frame_password.setSize(400, 400);
+							frame_password.setSize(300, 80);
 							frame_password.setLocationRelativeTo(null);
 							Enter_password = new JButton("Enter");
 							tfInput_password = new TextField(10);
 
 							Container cp_password = frame_password.getContentPane();
-							cp_password.add(tfInput_password);
 							cp_password.setLayout(new FlowLayout());
-							cp_password.add(Enter_password);
 							lb_password = new JLabel("Enter Password");
 							frame_password.add(lb_password);
+							cp_password.add(tfInput_password);
+							cp_password.add(Enter_password);
 							cp_password.setBackground(Color.WHITE);
 							frame_password.setVisible(true);
-							
+
 							Enter_password.addActionListener(new ActionListener() {
 
 								public void actionPerformed(ActionEvent evt) {
 									if (folder.password.equals(tfInput_password.getText())) {
 										frame_password.dispose();
 										// change name
-										
-										frame.dispose();
-										MyFrame fff = new MyFrame(file_list, folder_list, cd);
-										Show_list s = new Show_list(file_list, folder_list, cd, fff.frame);
-									}
-									else {
+										{
+											JFrame c_name = new JFrame();
+											change_name = c_name;
+											change_name.setTitle("Change Folder Name");
+											change_name.setSize(300, 80);
+											change_name.setLocationRelativeTo(null);
+
+											Enter_name = new JButton("Enter");
+											tfInput_name = new TextField(10);
+
+											Container cp_file = change_name.getContentPane();
+											cp_file.setLayout(new FlowLayout());
+											lb_name = new JLabel("Folder Name");
+											change_name.add(lb_name);
+											cp_file.add(tfInput_name);
+											cp_file.add(Enter_name);
+											cp_file.setBackground(Color.WHITE);
+											change_name.setVisible(true);
+
+											Enter_name.addActionListener(new ActionListener() {
+
+												public void actionPerformed(ActionEvent evt) {
+
+													new_name = tfInput_name.getText();
+													change_name.dispose();
+
+													new_path = new File(cd + "/" + new_name + "/");
+													for (int i = 0; i < folder_list.size(); i++) {
+														if (folder_list.get(i).directory.toString()
+																.contains(folder_list.get(fixed_i).folder.toString())) {
+
+															File change_directory = new File(
+																	new_path + folder_list.get(i).directory.toString()
+																			.substring(folder_list.get(fixed_i).folder
+																					.toString().length()));
+															folder_list.get(i).directory = change_directory;
+															File change_folder = new File(change_directory + "/"
+																	+ folder_list.get(i).folder_name + "/");
+															folder_list.get(i).folder = change_folder;
+														}
+													}
+													for (int i = 0; i < file_list.size(); i++) {
+														if (file_list.get(i).directory.toString()
+																.contains(folder_list.get(fixed_i).folder.toString())) {
+
+															File change_directory = new File(
+																	new_path + file_list.get(i).directory.toString()
+																			.substring(folder_list.get(fixed_i).folder
+																					.toString().length()));
+															file_list.get(i).directory = change_directory;
+
+														}
+													}
+
+													folder_list.get(fixed_i).folder = new_path;
+													folder_list.get(fixed_i).folder_name = new_name;
+
+													frame.dispose();
+													MyFrame fff = new MyFrame(file_list, folder_list, cd);
+													Show_list s = new Show_list(file_list, folder_list, cd, fff.frame);
+												}
+											});
+										}
+
+									} else {
 										JFrame f_wrongpw = new JFrame();
 										frame_wrongpw = f_wrongpw;
 										frame_wrongpw.setTitle("ERROR!");
-										frame_wrongpw.setSize(400, 400);
+										frame_wrongpw.setSize(300, 80);
 										frame_wrongpw.setLocationRelativeTo(null);
 										wrongpw = new JButton("Okay");
 
@@ -441,17 +583,4 @@ public class Folder_Frame extends JFrame {
 		return path.delete();
 	}
 
-	
-	class ImageButton extends JButton {
-		private String name;
-		private String image;
-
-		public ImageButton(String n, String i) {
-			super();
-			name = n;
-			image = i;
-		}
-
-		
-	}
 }
